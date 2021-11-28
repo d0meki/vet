@@ -28,11 +28,17 @@
                     {{-- <img src="{{ Storage::url('/profile-photos'.$this->user->profile_photo_url) }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover"> --}}
                     {{-- <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover"> --}}
                     @if (Auth::user()->profile_photo_path)
+                    <div class="mt-2" x-show="! photoPreview">
                         <img class="h-8 w-8 rounded-full object-cover"
                             src="/storage/{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}">
+                        </div>    
+                    
                     @else
-                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover">
-
+                   {{--  <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover"> --}}
+                    <div class="mt-2" x-show="! photoPreview">
+                        <img src="https://mod.go.ke/wp-content/uploads/2021/04/default-profile-pic.png" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover">
+                        
+                    </div>
                     @endif
                 </div>
 

@@ -1,30 +1,54 @@
 <div wire:init="loadPage">
+    @if ($rol == 'null')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            USUARIOS
         </h2>
     </x-slot>
+    @endif
+    @if ($rol == 'adm')
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            ADMINISTRADORES
+        </h2>
+    </x-slot>
+    @endif
+    @if ($rol == 'cliente')
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            CLIENTES
+        </h2>
+    </x-slot>
+    @endif
+    @if ($rol == 'empleado')
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            VETERINARIOS
+        </h2>
+    </x-slot>
+    @endif
+    
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <x-table>
             {{-- EL DESPLEGABLE DE LA CANTIDAD DE VALORES DE LA TABLA --}}
             <div class="px-6 py-4 flex items-center">
-               {{--  <div class="flex items-center">
+                <div class="flex items-center">
                     <span>Mostrar</span>
                     <select wire:model="cant" class="mr-4 ml-4 form-control">
+                        <option value="5">5</option>
                         <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
                     </select>
                     <span>Entradas</span>
-                </div> --}}
-
-                {{-- <input type="text" wire:model="search"> --}}
-                {{-- <x-jet-input class="w-full" placeholder="Escriba lo que quiere buscar" type="text" wire:model="search" /> --}}
+                </div>
                 {{-- BUSCADOR DE LA TABLA --}}
-               {{--  <x-jet-input class="flex-1 mr-4 ml-4" placeholder="Escriba lo que quiere buscar" type="text"
+                <x-jet-input class="flex-1 mr-4 ml-4" placeholder="Escriba lo que quiere buscar" type="text"
                     wire:model="search" />
-                @livewire('create-post') --}}
+                    @if ($rol == 'empleado' || $rol == 'adm')
+                        @livewire('create-usuarios')
+                    @endif
+                
             </div>
             {{-- LA TABLA CABECERA CON FUNCIONALIDAD DE ORDENAMIENTO --}}
             {{-- @if ($posts->count()) --}}
@@ -77,13 +101,12 @@
                                 class=" cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Direccion
                             </th>
+                            @if ($rol == 'null')
                             <th scope="col"
                                 class=" cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Rol
-                            </th>
-                            <th scope="col" class="relative px-6 py-3">
-                                <span class="sr-only">Edit</span>
-                            </th>
+                            </th>  
+                            @endif                       
                         </tr>
                     </thead>
                     {{-- CUERPO DE LA TABLA DONDE MOSTRAMOS LOS DATOS --}}
@@ -105,45 +128,38 @@
                                 <td class="px-6 py-4">
                                     <div class="text-sm text-gray-900">{{ $item->address }}</div>
                                 </td>
-                                <td class="px-6 py-4">
-                                    <div class="text-sm text-gray-900">
-                                         @forelse ($item->roles as $role)
-                                             <span class="badge badge-info"> {{ $role->name }} </span>
-                                         @empty
-                                         <span class="badge badge-danger"> No roles </span>
-                                         @endforelse
-                                    </div>
-                                </td>
-                               {{--  <td class="px-6 py-4 text-sm font-medium">
-                                    <a class="btn btn-green" wire:click="edit({{ $item }})">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                </td> --}}
-                                {{-- <td>
-                                    <a class="btn btn-red mr-4" wire:click="$emit('deletePost',{{ $item->id }})">
+                                @if ($rol == 'null')
+                                    <td class="px-6 py-4">
+                                        <div class="text-sm text-gray-900">
+                                            @forelse ($item->roles as $role)
+                                                <span class="badge badge-info"> {{ $role->name }} </span>
+                                            @empty
+                                                <span class="badge badge-danger">No roles </span>
+                                            @endforelse
+                                        </div>
+                                    </td>
+                                    
+                                @endif 
+                               
+                                <td>
+                                    <a class="btn btn-red mr-4" wire:click="$emit('deleteUsuario',{{ $item->id }})" >
                                         <i class="fas fa-trash"></i>
                                     </a>
-                                </td> --}}
+                                </td>                                          
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-               {{--  @if ($posts->hasPages())
+                @if ($usuarios->hasPages())
                     <div class="px-6 py-3">
-                        {{ $posts->links() }}
+                        {{ $usuarios->links() }}
                     </div>
-                @endif --}}
+                @endif
             @else
                 <div class="px-6 py-4">
                     No existe ningun Registro coinsidente
                 </div>
             @endif
-
-            {{-- @if ($posts->hasPages())
-            <div class="px-6 py-3">
-                {{ $posts->links() }}
-            </div>
-            @endif --}}
 
         </x-table>
 
@@ -156,7 +172,7 @@
 
 
         <script>
-            Livewire.on('deletePost', postId => {
+            Livewire.on('deleteUsuario', userId => {
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",
@@ -168,7 +184,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
 
-                        Livewire.emitTo('show-posts','delete', postId)
+                        Livewire.emitTo('show-usuarios', 'delete', userId)
 
                         Swal.fire(
                             'Deleted!',

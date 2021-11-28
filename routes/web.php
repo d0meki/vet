@@ -35,7 +35,7 @@ Route::get('/mismascotas', function () {
 });
 
 Route::get('/mismascotas',Mascotas::class)->name('show.mascotas');
-Route::get('/usuarios',ShowUsuarios::class)->name('show.usuarios');
+Route::get('/usuarios/{rol}',ShowUsuarios::class)->name('show.usuarios');/*  */
 Route::get('/jaulas',Jaula::class)->name('show.jaulas');
 Route::get('/servicios', IndexServicio::class)->name('index.servicios');
 Route::get('/recetas', Recetas::class)->name('show.recetas');
