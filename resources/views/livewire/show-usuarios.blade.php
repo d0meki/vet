@@ -47,8 +47,7 @@
                     wire:model="search" />
                     @if ($rol == 'empleado' || $rol == 'adm')
                         @livewire('create-usuarios')
-                    @endif
-                
+                    @endif                
             </div>
             {{-- LA TABLA CABECERA CON FUNCIONALIDAD DE ORDENAMIENTO --}}
             {{-- @if ($posts->count()) --}}

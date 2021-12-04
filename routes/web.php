@@ -5,7 +5,10 @@ use App\Http\Livewire\Jaula;
 use App\Http\Livewire\Mascota;
 use App\Http\Livewire\Mascotas;
 use App\Http\Livewire\Recetas;
+use App\Http\Livewire\ShowAddservicio;
+use App\Http\Livewire\ShowMascotas;
 use App\Http\Livewire\ShowUsuarios;
+use App\Http\Livewire\VerRecursos;
 use Facade\Ignition\ErrorPage\Renderer;
 use Illuminate\Support\Facades\Route;
 
@@ -38,7 +41,13 @@ Route::get('/mismascotas',Mascotas::class)->name('show.mascotas');
 Route::get('/usuarios/{rol}',ShowUsuarios::class)->name('show.usuarios');/*  */
 Route::get('/jaulas',Jaula::class)->name('show.jaulas');
 Route::get('/servicios', IndexServicio::class)->name('index.servicios');
-Route::get('/recetas', Recetas::class)->name('show.recetas');
+/* Route::get('/recetas', Recetas::class)->name('show.recetas'); */
+Route::get('/mascotas', ShowMascotas::class)->name('show.pets');
+Route::get('/addservicios', ShowAddservicio::class)->name('show.addservicios');
+
+
+
+Route::get('/imprimir/{id}', [VerRecursos::class , 'imprimir'])->name('ver.receta');
 
 
 Route::get('/CarnetVacunacion','App\Http\Controllers\CarnetVacunacionController@index')

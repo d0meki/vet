@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Mascota;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use PhpParser\Node\Expr\FuncCall;
@@ -18,7 +19,9 @@ class Mascotas extends Component
 
     public function render()
     {
-        $mascotas = Mascota::orderBy('id','desc')->get();
+
+        $mascotas = Mascota::where('user_id',Auth::id())
+        ->orderBy('id','desc')->get();
         return view('livewire.mascotas',compact('mascotas'));
     }
 }

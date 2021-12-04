@@ -29,8 +29,7 @@
 
             <div class="mb-4" wire:ignore>
                 <x-jet-label value="Descripcion de la Jaula" />
-                <x-jet-input id="editor" wire:model="descripcion" type="text" class="w-full"
-                    wire:model="descripcion" />
+                <x-jet-input id="editor" wire:model="descripcion" type="text" class="w-full" />
                 <x-jet-input-error for="descripcion" />
             </div>
 
@@ -71,6 +70,5 @@
                     console.error(error);
                 });
         </script>
-
     @endpush
 </div>

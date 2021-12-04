@@ -24,9 +24,11 @@ class RoleSeeder extends Seeder
        Permission::create(['name' => 'show.usuarios'])->assignRole($role1);
        Permission::create(['name' => 'show.jaulas'])->syncRoles([$role1,$role2]);
        Permission::create(['name' => 'index.servicios'])->syncRoles([$role1,$role2]);
-       Permission::create(['name' => 'show.recetas'])->syncRoles([$role1,$role2]);
+       /* Permission::create(['name' => 'show.recetas'])->syncRoles([$role1,$role2]); */
        Permission::create(['name' => 'CarnetVacunacion.create'])->syncRoles([$role1,$role2]);
        Permission::create(['name' => 'CarnetVacunacion.index'])->syncRoles([$role1,$role2]);
        Permission::create(['name' => 'CarnetVacunacion.edit'])->syncRoles([$role1,$role2]);
+       Permission::create(['name' => 'show.pets'])->syncRoles([$role1,$role2]);       
+       Permission::create(['name' => 'show.addservicios'])->syncRoles([$role1,$role2]);       
     }
 }

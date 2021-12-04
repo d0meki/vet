@@ -115,20 +115,12 @@
                         {{ $janimals->links() }}
                     </div>
                 @endif
-
-
             @else
-
-
                 <div class="px-6 py-4">
                     NO existe ningun registro coincidente
 
                 </div>
             @endif
-
-
-
-
         </x-table>
     </div>
     <x-jet-dialog-modal wire:model="open_edit">

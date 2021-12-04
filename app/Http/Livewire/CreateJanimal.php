@@ -20,7 +20,7 @@ class CreateJanimal extends Component
     protected $rules = [
         'nombre' => 'required',
         'descripcion' => 'required',
-        'image' => 'required|image|max:2048'
+       // 'image' => 'required|image|max:2048'
 
     ];
 
@@ -28,8 +28,11 @@ class CreateJanimal extends Component
 
     public function save(){
             $this->validate();
-            $image = $this->image->store('imagenes');
-
+            if($this->image != null){
+                $image = $this->image->store('imagenes');
+            }else{
+                $image = null;
+            }    
         Jaula::create([
             'nombre'=> $this->nombre,
             'descripcion' => $this->descripcion,

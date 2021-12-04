@@ -23,20 +23,28 @@
                     @endcan
                     @can('index.servicios')
                         <x-jet-nav-link href="{{ route('index.servicios') }}" :active="request()->routeIs('servicios')">
-                            Servicios
+                            Tipos de Servicio
                         </x-jet-nav-link>
                     @endcan
-                    @can('show.recetas')
+                   {{--  @can('show.recetas')
                         <x-jet-nav-link href="{{ route('show.recetas') }}" :active="request()->routeIs('recetas')">
                             Recetas
                         </x-jet-nav-link>
-                    @endcan
+                    @endcan --}}
                     @can('CarnetVacunacion.index')
                         <x-jet-nav-link href="{{ route('CarnetVacunacion.index') }}"
                             :active="request()->routeIs('CarnetVacunacion')">
                             Carnet Vacunacion
                         </x-jet-nav-link>
                     @endcan
+                    @can('show.pets')
+                        <x-jet-nav-link href="{{ route('show.pets') }}" :active="request()->routeIs('pets')">
+                            Pets
+                        </x-jet-nav-link>
+                    @endcan
+                    <x-jet-nav-link href="{{ route('show.addservicios') }}" :active="request()->routeIs('serv')">
+                        Añadir Servicios
+                    </x-jet-nav-link>
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         @can('show.usuarios')
                             <x-jet-dropdown align="right" width="60">
@@ -66,6 +74,7 @@
                             </x-jet-dropdown>
                         @endcan
 
+
                     </div>
                 </div>
             </div>
@@ -80,7 +89,8 @@
                                         class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
                                         {{ Auth::user()->currentTeam->name }}
 
-                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="https://mod.go.ke/wp-content/uploads/2021/04/default-profile-pic.png"
+                                        <svg class="ml-2 -mr-0.5 h-4 w-4"
+                                            xmlns="https://mod.go.ke/wp-content/uploads/2021/04/default-profile-pic.png"
                                             viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd"
                                                 d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
@@ -223,11 +233,7 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
-            {{-- @can('show.usuarios')
-                <x-jet-responsive-nav-link href="{{ route('show.usuarios') }}" :active="request()->routeIs('usuarios')">
-                    Usuarios
-                </x-jet-responsive-nav-link>
-            @endcan --}}
+
             @can('show.jaulas')
                 <x-jet-responsive-nav-link href="{{ route('show.jaulas') }}" :active="request()->routeIs('jaulas')">
                     Jaulas
@@ -236,20 +242,61 @@
             @can('index.servicios')
                 <x-jet-responsive-nav-link href="{{ route('index.servicios') }}"
                     :active="request()->routeIs('servicios')">
-                    Servicios
+                    Tipos de Servicio
                 </x-jet-responsive-nav-link>
             @endcan
-            @can('show.recetas')
+           {{--  @can('show.recetas')
                 <x-jet-responsive-nav-link href="{{ route('show.recetas') }}" :active="request()->routeIs('recetas')">
                     Recetas
                 </x-jet-responsive-nav-link>
-            @endcan
+            @endcan --}}
             @can('CarnetVacunacion.index')
                 <x-jet-responsive-nav-link href="{{ route('CarnetVacunacion.index') }}"
                     :active="request()->routeIs('CarnetVacunacion')">
                     Carnet de Vacunacion
                 </x-jet-responsive-nav-link>
             @endcan
+            @can('show.pets')
+                <x-jet-responsive-nav-link href="{{ route('show.pets') }}" :active="request()->routeIs('pets')">
+                    Pets
+                </x-jet-responsive-nav-link>
+            @endcan
+            <x-jet-responsive-nav-link href="{{ route('show.addservicios') }}" :active="request()->routeIs('serv')">
+                Añadir Servicios
+            </x-jet-responsive-nav-link>
+
+            @can('show.usuarios')
+                <x-jet-responsive-nav-link href="#" :active="request()->routeIs('usuarios')">
+                    <x-jet-dropdown align="right" width="60">
+                        <x-slot name="trigger">
+                            <x-jet-nav-link href="#">
+                                Desplegar opciones de usuario
+                            </x-jet-nav-link>
+                        </x-slot>
+                        <x-slot name="content">
+                            <x-jet-dropdown-link href="{{ route('show.usuarios', 'null') }}"
+                                :active="request()->routeIs('usuarios')">
+                                {{ __('Todos los Usuarios') }}
+                            </x-jet-dropdown-link>{{--  --}}
+                            <x-jet-dropdown-link href="{{ route('show.usuarios', 'adm') }}"
+                                :active="request()->routeIs('usuarios')">
+                                {{ __('Administradores') }}
+                            </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ route('show.usuarios', 'empleado') }}"
+                                :active="request()->routeIs('usuarios')">
+                                {{ __('Veterinarios') }}
+                            </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ route('show.usuarios', 'cliente') }}"
+                                :active="request()->routeIs('usuarios')">
+                                {{ __('Clientes') }}
+                            </x-jet-dropdown-link>
+                        </x-slot>
+                    </x-jet-dropdown>
+
+                </x-jet-responsive-nav-link>
+            @endcan
+
+
             <!-- Responsive Settings Options -->
             <div class="pt-4 pb-1 border-t border-gray-200">
                 <div class="flex items-center px-4">
@@ -266,7 +313,6 @@
                             @endif
                         </div>
                     @endif
-
                     <div>
                         <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                         <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
@@ -292,7 +338,7 @@
                         @csrf
 
                         <x-jet-responsive-nav-link href="{{ route('logout') }}" onclick="event.preventDefault();
-                                    this.closest('form').submit();">
+                        this.closest('form').submit();">
                             {{ __('Log Out') }}
                         </x-jet-responsive-nav-link>
                     </form>

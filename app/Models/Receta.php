@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Receta extends Model
 {
-    protected $fillable=['fecha','nombre_medicamento','dosis','id_servicio'];
+    protected $fillable=['fecha','nombre_medicamento','dosis','servicio_id'];
     use HasFactory;
 }

@@ -83,7 +83,7 @@
 
             <x-jet-danger-button class="disabled.opacity-25" wire:click="save" wire:loading.attr="disabled"
                 wire:target="save">
-                crear post
+                crear usuario
             </x-jet-danger-button>
             <span wire:loading wire:target="save">
                 Cargando..
@@ -91,4 +91,5 @@
         </x-slot>
 
     </x-jet-dialog-modal>
+  
 </div>

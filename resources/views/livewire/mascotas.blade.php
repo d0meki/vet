@@ -23,9 +23,7 @@
                             Eliminar
                         </x-jet-danger-button>
                     </div>
-
                 </div>
-
             </section>
         </x-jet-authentication-card>
     @endforeach

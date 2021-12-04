@@ -17,7 +17,7 @@ class CreateJaulasTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('descripcion');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

@@ -15,6 +15,15 @@ class CreateRecursosTable extends Migration
     {
         Schema::create('recursos', function (Blueprint $table) {
             $table->id();
+            $table->String('nombre', 45);
+            $table->String('serie', 45);
+            $table->decimal('costo', 6, 2);
+            $table->unsignedBigInteger('servicio_id');
+            $table->foreign('servicio_id')
+                ->references('id')
+                ->on('servicios')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }

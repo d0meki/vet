@@ -18,7 +18,12 @@ class CreateRecetasTable extends Migration
             $table->date('fecha');
             $table->String('nombre_medicamento',191);
             $table->String('dosis',191);
-            $table->String('id_servicio');
+            $table->unsignedBigInteger('servicio_id');
+            $table->foreign('servicio_id')
+                ->references('id')
+                ->on('servicios')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }
