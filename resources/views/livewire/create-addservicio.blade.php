@@ -1,5 +1,4 @@
 <div wire:init="loadPage">
-    {{-- The Master doesn't talk, he acts. --}}
     <x-jet-danger-button class="mb-4 mt-4 mx-4" wire:click="$set('open',true)">
         Agregar
     </x-jet-danger-button>
@@ -31,15 +30,12 @@
             </div>
             <div class="mb-4">
                 <x-jet-label value="Tipo de Servicio" />
-                {{-- <x-jet-input type="text" class="w-full" wire:model="tipo_id" /> --}}
                 <select wire:model="tipo_servicio" class="mr-4 ml-4 form-control">
                     <option>Seleccione un servicio</option>
                     @foreach ($tipos as $item)
                         <option>{{ $item->nombre }}</option>
                     @endforeach
-                    {{-- <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option> --}}
+                  
                 </select>
                 <x-jet-input-error for='tipo_servicio' />
                 @error('tipo_servicio')
@@ -48,6 +44,20 @@
                     </span>
                 @enderror
             </div>
+            {{-- <div class="relative">
+                <input type="text" wire:model="cliente" class="py-1 border-solid border-4 border-light-blue-500 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md w-full pl-10"  placeholder="buscando cliente...">
+            </div>
+            @if ($cliente != null && $cliente != ' ' && $query->count())
+                <div class="shadow-2x1 w-full rounded px-3 py-3 pb-0 absolute z-20" style="background-color: white">
+                    @foreach ($query as $item)
+                        <ul class="max-h-screen bottom-auto text-sm pb-2">
+                            <li>
+                                {{ $item->name }}
+                            </li>
+                        </ul>
+                    @endforeach
+                </div>
+            @endif --}}
             <div class="mb-4">
                 <x-jet-label value="Cliente" />
                 <x-jet-input type="text" class="w-full" wire:model="cliente" />
@@ -75,15 +85,11 @@
             </div>
             <div class="mb-4">
                 <x-jet-label value="Lista de Jaulas" />
-                {{-- <x-jet-input type="text" class="w-full" wire:model="tipo_id" /> --}}
                 <select wire:model="jaula_nombre" class="mr-4 ml-4 form-control">
                     <option>Seleccione una Jaula</option>
                     @foreach ($jaulas as $item)
                         <option>{{ $item->nombre }}</option>
                     @endforeach
-                    {{-- <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option> --}}
                 </select>
                 <x-jet-input-error for='jaula_nombre' />
                 @error('jaula_nombre')

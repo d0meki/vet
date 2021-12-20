@@ -13,38 +13,40 @@ use Livewire\Component;
 class CreateAddservicio extends Component
 {
     public $open = false;
-    public $nombre,$jaula_nombre,$tipo_servicio,$costo;
-    public $user,$jaula;
+    public $nombre, $jaula_nombre, $tipo_servicio, $costo;
+    public $user, $jaula;
     public $personal;
     public $query;
-    public $cliente = '';
+    // public $cliente = '';
+    public $cliente = null;
     public $readyToLoad = false;
 
- /*
+    /*
     public function updateQuery(){
         $this->clientes = User::where('name','ilike','%'.$this->query.'%')
         ->get()
         ->toArray();
     } */
     protected $rules = [
-       'nombre' => 'required',
-       'personal' => 'required',
-       'tipo_servicio' => 'required',
-       'cliente' => 'required',
-       'costo' => 'required'
-      // 'jaula_nombre' => 'required',
+        'nombre' => 'required',
+        'personal' => 'required',
+        'tipo_servicio' => 'required',
+        'cliente' => 'required',
+        'costo' => 'required'
+        // 'jaula_nombre' => 'required',
     ];
-    public function save(){
+    public function save()
+    {
         $this->validate();
-        $user_id = User::where('name',$this->cliente)->get('id');    
-        $tipo_id = Tipos::where('nombre',$this->tipo_servicio)->get('id');
-        if($this->jaula_nombre != null){
-            $jaula_id = Jaula::where('nombre',$this->jaula_nombre)->get('id');
+        $user_id = User::where('name', $this->cliente)->get('id');
+        $tipo_id = Tipos::where('nombre', $this->tipo_servicio)->get('id');
+        if ($this->jaula_nombre != null) {
+            $jaula_id = Jaula::where('nombre', $this->jaula_nombre)->get('id');
             $jaula_id = $jaula_id[0]->id;
-        }else{
+        } else {
             $jaula_id = null;
-        }       
-        $this->personal = User::where('id',Auth::id())->get('name');
+        }
+        $this->personal = User::where('id', Auth::id())->get('name');
         Servicio::create([
             'nombre' => $this->nombre,
             'tipo_id' => $tipo_id[0]->id,
@@ -53,25 +55,26 @@ class CreateAddservicio extends Component
             'jaula_id' => $jaula_id,
             'costo' => $this->costo
         ]);
-        $this->reset(['nombre','tipo_servicio','cliente','jaula_nombre','personal','open','costo']);
-        $this->emitTo('show-addservicio','render');
-        $this->emit('alert','El servicio se agrego satisfactoriamente');
+        $this->reset(['nombre', 'tipo_servicio', 'cliente', 'jaula_nombre', 'personal', 'open', 'costo']);
+        $this->emitTo('show-addservicio', 'render');
+        $this->emit('alert', 'El servicio se agrego satisfactoriamente');
     }
     public function loadPage()
-  {
-    $this->readyToLoad = true;
-  }
+    {
+        $this->readyToLoad = true;
+    }
     public function render()
-    {   
+    {
         $tipos = Tipos::all();
-        $this->personal = User::where('id',Auth::id())->get('name');
+        $this->personal = User::where('id', Auth::id())->get('name');
         $this->personal = $this->personal[0]->name;
-       if ($this->readyToLoad) {
-        $this->query = User::where('name','ilike','%'.$this->cliente.'%')->get();
-       }else{
-        $this->query = []; 
-       }
-       $jaulas = Jaula::all();
-        return view('livewire.create-addservicio',compact('tipos','jaulas'));
+        $jaulas = Jaula::all();
+        if ($this->readyToLoad) {
+
+            $this->query = User::where('name','ilike','%'.$this->cliente.'%')->get();
+           }else{
+            $this->query = []; 
+           } 
+        return view('livewire.create-addservicio',compact('tipos', 'jaulas'));
     }
 }
