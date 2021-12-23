@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Helpers\BitacoraHelper;
 use App\Models\Mascota;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -39,7 +40,7 @@ class CreateMascota extends Component
             'image' => $image,
             'user_id' => Auth::id()
         ]);
-
+        BitacoraHelper::insertBitacora('El usuario '.Auth::user()->name.' agrego una mascota');
         $this->reset(['open','nombre','tipo','raza','sexo','caracteristicas','image']);
         $this->identificador = rand();
         $this->emitTo('mascotas','render');

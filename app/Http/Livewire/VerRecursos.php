@@ -24,7 +24,7 @@ class VerRecursos extends Component
         return $pdf->stream();
       //  return $pdf->download('archivo-pdf.pdf');
     }
-    
+        
     public function render()
     {
         $recetas = Receta::where('servicio_id',$this->servicio->id)->get();

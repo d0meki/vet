@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Helpers\BitacoraHelper;
 use App\Models\Jaula;
 use App\Models\Servicio;
 use App\Models\Tipos;
@@ -55,6 +56,7 @@ class CreateAddservicio extends Component
             'jaula_id' => $jaula_id,
             'costo' => $this->costo
         ]);
+        BitacoraHelper::insertBitacora(Auth::user()->name.' agrego servicio: '.$this->nombre);
         $this->reset(['nombre', 'tipo_servicio', 'cliente', 'jaula_nombre', 'personal', 'open', 'costo']);
         $this->emitTo('show-addservicio', 'render');
         $this->emit('alert', 'El servicio se agrego satisfactoriamente');

@@ -15,7 +15,7 @@
             </a>
             @if (count($recetas))
             <div class="w-full bg-white rounded-lg shadow-lg lg:w-1/3">
-                <samp><strong>Fecha: {{ $recetas[0]->fecha }}</strong></samp>
+                <samp><strong>Fecha: {{ $recetas[0]->created_at }}</strong></samp>
                 <ul class="px-0">
                     @foreach ($recetas as $item)
                         <li class="border  list-none rounded-sm px-3 py-3">{{ $item->nombre_medicamento }} -

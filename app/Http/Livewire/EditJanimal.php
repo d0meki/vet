@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Helpers\BitacoraHelper;
 use App\Models\Jaula;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -38,7 +40,7 @@ class EditJanimal extends Component
       $this->identificador = rand();
 
       $this->emitTo('jaula','render');
-
+      BitacoraHelper::insertBitacora('El usuario '.Auth::user()->name.' edito info de jaula');
      $this->emit('alert','la jaula se actualizo exitosamente');
 
     }

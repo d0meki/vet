@@ -49,6 +49,14 @@ class UserSeeder extends Seeder
             'password' => bcrypt('password')
         ])->assignRole('adm');
         $admin3->createToken('auth_token')->plainTextToken;
+        $admin3 = User::create([
+            'name' => 'Pedro Esteban Saca',
+            'phone' => '69321242',
+            'address' => '6to anillo Calle B',
+            'email' => 'pedro@gmail.com',
+            'password' => bcrypt('12345678')
+        ])->assignRole('adm');
+        $admin3->createToken('auth_token')->plainTextToken;
         $cliente1 = User::create([
             'name' => 'Nazareth Ordoñez',
             'phone' => '72390123',

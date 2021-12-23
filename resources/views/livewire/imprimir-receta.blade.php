@@ -32,7 +32,7 @@
                         @foreach ($recetas as $receta)
                         <tr>
                             
-                            <td>{{ $receta->fecha }}</td>
+                            <td>{{ $receta->created_at }}</td>
                             <td>{{ $receta->nombre_medicamento }}</td>
                             <td>{{ $receta->dosis }}</td>
                             <td>{{ $receta->servicio_id }}</td>

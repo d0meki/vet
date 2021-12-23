@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Helpers\BitacoraHelper;
 use App\Models\Tipos;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -79,6 +81,7 @@ class IndexServicio extends Component
         ]);
         $this->closeModal();
         $this->resetForm();
+        BitacoraHelper::insertBitacora('El usuario '.Auth::user()->name.' agrego un tipo de servicio');
     }
 
     public function edit($id)
@@ -90,7 +93,7 @@ class IndexServicio extends Component
         $this->costo = $servicio->costo;
         $this->imagenurl = $servicio->imagenurl;
         $this->status = $servicio->status;
-
+        BitacoraHelper::insertBitacora('El usuario '.Auth::user()->name.' edito tipo de servicio');
         $this->openModal();
     }
 

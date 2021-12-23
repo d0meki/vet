@@ -10,4 +10,5 @@ class ApiTipoServiciosController extends Controller
     public function index(){
         return Tipos::all();
     }
+    
 }

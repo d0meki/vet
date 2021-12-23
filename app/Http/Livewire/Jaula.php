@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Helpers\BitacoraHelper;
 use App\Models\Jaula as ModelsJaula;
 use App\Models\Mascota;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -98,11 +100,13 @@ class Jaula extends Component
         $this->identificador = rand();
 
         $this->emitTo('jaula', 'render');
-
+        BitacoraHelper::insertBitacora('El usuario '.Auth::user()->name.' actualizo jaula: '.$this->janimal->nombre);
         $this->emit('alert', 'la jaula se actualizo exitosamente');
     }
     public function delete(ModelsJaula $janimal){
         Storage::delete([$janimal->image]);
+       
         $janimal ->delete(); 
+        BitacoraHelper::insertBitacora('El usuario '.Auth::user()->name.' elimino jaula: '.$this->janimal->nombre);
     }
 }

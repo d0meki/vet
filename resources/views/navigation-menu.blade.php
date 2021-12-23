@@ -12,9 +12,9 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    {{-- <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
-                    </x-jet-nav-link>
+                    </x-jet-nav-link> --}}
 
                     @can('show.jaulas')
                         <x-jet-nav-link href="{{ route('show.jaulas') }}" :active="request()->routeIs('jaulas')">
@@ -76,6 +76,12 @@
 
 
                     </div>
+                    <x-jet-nav-link href="{{ route('show.reportes_servicios') }}" >
+                        {{ __('Reportes Servicio') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('show.reportes_bitacora') }}" >
+                        {{ __('Reporte Bitacora') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
             <div class="hidden sm:flex sm:items-center sm:ml-6">

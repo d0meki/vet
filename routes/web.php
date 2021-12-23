@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\AddHistorial;
 use App\Http\Livewire\IndexServicio;
 use App\Http\Livewire\Jaula;
 use App\Http\Livewire\Mascota;
@@ -48,6 +49,16 @@ Route::get('/addservicios', ShowAddservicio::class)->name('show.addservicios');
 
 
 Route::get('/imprimir/{id}', [VerRecursos::class , 'imprimir'])->name('ver.receta');
+Route::get('/addhistorial', AddHistorial::class)->name('show.addhistorial');
+
+
+Route::get('/servicioreporte','App\Http\Controllers\ReportesController@GenerarReporteServicios')
+    ->name('show.reportes_servicios');
+       
+Route::get('/bitacorareporte','App\Http\Controllers\ReportesController@GenerarReporteBitacora')
+    ->name('show.reportes_bitacora');
+
+
 
 
 Route::get('/CarnetVacunacion','App\Http\Controllers\CarnetVacunacionController@index')

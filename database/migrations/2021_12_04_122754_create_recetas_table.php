@@ -15,7 +15,6 @@ class CreateRecetasTable extends Migration
     {
         Schema::create('recetas', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
             $table->String('nombre_medicamento',191);
             $table->String('dosis',191);
             $table->unsignedBigInteger('servicio_id');
