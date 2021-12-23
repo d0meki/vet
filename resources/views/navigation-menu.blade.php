@@ -31,19 +31,22 @@
                             Recetas
                         </x-jet-nav-link>
                     @endcan --}}
-                    @can('CarnetVacunacion.index')
+                    {{-- @can('CarnetVacunacion.index')
                         <x-jet-nav-link href="{{ route('CarnetVacunacion.index') }}"
                             :active="request()->routeIs('CarnetVacunacion')">
                             Carnet Vacunacion
                         </x-jet-nav-link>
-                    @endcan
+                    @endcan --}}
                     @can('show.pets')
                         <x-jet-nav-link href="{{ route('show.pets') }}" :active="request()->routeIs('pets')">
                             Pets
                         </x-jet-nav-link>
                     @endcan
+                    <x-jet-nav-link href="{{ route('show.addhistorial') }}" :active="request()->routeIs('pets')">
+                        Add Historial
+                    </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('show.addservicios') }}" :active="request()->routeIs('serv')">
-                        Añadir Servicios
+                        Add Servicios
                     </x-jet-nav-link>
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         @can('show.usuarios')
@@ -76,12 +79,31 @@
 
 
                     </div>
-                    <x-jet-nav-link href="{{ route('show.reportes_servicios') }}" >
+                    <div class="hidden sm:flex sm:items-center sm:ml-6">
+                            <x-jet-dropdown align="right" width="60">
+                                <x-slot name="trigger">
+                                    <x-jet-nav-link href="#">
+                                        Reportes
+                                    </x-jet-nav-link>
+                                </x-slot>
+                                <x-slot name="content">
+                                    <x-jet-dropdown-link href="{{ route('show.reportes_servicios') }}"
+                                        :active="request()->routeIs('reportes')">
+                                        {{ __('Reportes Servicio') }}
+                                    </x-jet-dropdown-link>{{--  --}}
+                                    <x-jet-dropdown-link href="{{ route('show.reportes_bitacora') }}"
+                                        :active="request()->routeIs('bitacoras')">
+                                        {{ __('Reporte Bitacora') }}
+                                    </x-jet-dropdown-link>
+                                </x-slot>
+                            </x-jet-dropdown>
+                    </div>
+                   {{--  <x-jet-nav-link href="{{ route('show.reportes_servicios') }}" >
                         {{ __('Reportes Servicio') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('show.reportes_bitacora') }}" >
                         {{ __('Reporte Bitacora') }}
-                    </x-jet-nav-link>
+                    </x-jet-nav-link> --}}
                 </div>
             </div>
             <div class="hidden sm:flex sm:items-center sm:ml-6">
