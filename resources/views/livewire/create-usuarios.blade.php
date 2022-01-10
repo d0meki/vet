@@ -1,6 +1,7 @@
 <div>
     {{-- The Master doesn't talk, he acts. --}}
-    <x-jet-danger-button wire:click="$set('open',true)">
+
+    <x-jet-danger-button class="mt-4 mx-4" wire:click="$set('open',true)">
         CREAR USUARIO
     </x-jet-danger-button>
 
@@ -20,6 +21,7 @@
                     </span>
                 @enderror
             </div>
+
             <div class="mb-4">
                 <x-jet-label value="Telefono" />
                 <x-jet-input type="text" class="w-full" wire:model.defer="phone" />
@@ -66,7 +68,7 @@
                     </span>
                 @enderror
             </div>
-            <div class="px-6 py-4 flex items-center">
+            <div class="mb-4">
                 <div class="flex items-center">
                     <span>ROL</span>
                     <select wire:model="rol" class="mr-4 ml-4 form-control">
@@ -75,6 +77,8 @@
                         <option value="adm">administrador</option>
                     </select>
                 </div>
+            </div>
+
         </x-slot>
         <x-slot name="footer">
             <x-jet-secondary-button wire:click="$set('open',false)">
@@ -91,5 +95,5 @@
         </x-slot>
 
     </x-jet-dialog-modal>
-  
+
 </div>

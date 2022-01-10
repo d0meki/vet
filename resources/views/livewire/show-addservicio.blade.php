@@ -40,6 +40,10 @@
                             </th>
                             <th scope="col"
                                 class=" cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Mascota
+                            </th>
+                            <th scope="col"
+                                class=" cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Personal
                             </th>
                             <th scope="col"
@@ -73,6 +77,9 @@
                                     <div class="text-sm text-gray-900">{{ $item->user->name }}</div>
                                 </td>
                                 <td class="px-6 py-4">
+                                    <div class="text-sm text-gray-900">{{ $item->mascota->nombre }}</div>
+                                </td>
+                                <td class="px-6 py-4">
                                     <div class="text-sm text-gray-900">{{ $item->personal }}</div>
                                 </td>
                                 <td class="px-6 py-4">
@@ -90,12 +97,12 @@
                                 </td>
                                 <td class="px-6 py-4  text-sm font-medium flex">
                                     <ol>
-                                        <li>
+                                        {{-- <li>
                                             <a href="#" class="text-red-600 hover:text-red-900"
                                                 wire:click="$emit('deleteServicio',{{ $item->id }})">
                                                 eliminar
                                             </a>
-                                        </li>
+                                        </li> --}}
                                         <li>
                                             <a href="#" class="text-green-600 hover:text-green-900"
                                                 wire:click="crearRecursos({{ $item }})">
@@ -113,6 +120,32 @@
                                         </li>
                                     </ol>
                                 </td>
+                                {{-- <td>
+                                    <div class="hidden sm:flex sm:items-center sm:ml-6" position: relative>
+                                        <x-jet-dropdown align="right" width="60">
+                                            <x-slot name="trigger">
+                                                <x-jet-nav-link href="#">
+                                                    Acciones
+                                                </x-jet-nav-link>
+                                            </x-slot>
+                                            <x-slot name="content">
+                                                <x-jet-dropdown-link href="#"
+                                                    wire:click="crearRecursos({{ $item }})">
+                                                    {{ __('Agregar Recursos') }}
+                                                </x-jet-dropdown-link>
+                                                <x-jet-dropdown-link href="#"
+                                                    wire:click="crearRecetas({{ $item }})">
+                                                    {{ __('Agregar Receta') }}
+                                                </x-jet-dropdown-link>
+                                                @livewire('ver-recursos',['servicio' => $item],key($item->id))
+                                                <x-jet-dropdown-link href="#"
+                                                    wire:click="$emit('deleteServicio',{{ $item->id }})">
+                                                    {{ __('Eliminar') }}
+                                                </x-jet-dropdown-link>
+                                            </x-slot>
+                                        </x-jet-dropdown>
+                                    </div>
+                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>
@@ -142,20 +175,22 @@
                 <x-jet-input type="text" wire:model="serie" class=" w-full" />
             </div>
             <div>
+                <x-jet-label value="Tipo" />
+                <x-jet-input type="text" wire:model="tipo" class=" w-full" />
+            </div>
+            <div>
                 <x-jet-label value="Costo" />
                 <x-jet-input type="number" wire:model="costo_recurso" class=" w-full" />
             </div>
         </x-slot>
 
         <x-slot name='footer'>
-
-            <x-jet-secondary-button wire:click="$set('open_recursos',false)">
-                Cancelar
-            </x-jet-secondary-button>
-
             <x-jet-danger-button wire:click="saveRecursos" wire:loading.attr="disabled" class="disabled:opacity-25">
                 Guardar
             </x-jet-danger-button>
+            <x-jet-secondary-button wire:click="$set('open_recursos',false)">
+                Terminar
+            </x-jet-secondary-button>
         </x-slot>
 
     </x-jet-dialog-modal>
@@ -184,14 +219,12 @@
         </x-slot>
 
         <x-slot name='footer'>
-
-            <x-jet-secondary-button wire:click="$set('open_recetas',false)">
-                Cancelar
-            </x-jet-secondary-button>
-
             <x-jet-danger-button wire:click="saveRecetas" wire:loading.attr="disabled" class="disabled:opacity-25">
                 Guardar
             </x-jet-danger-button>
+            <x-jet-secondary-button wire:click="$set('open_recetas',false)">
+                Terminar
+            </x-jet-secondary-button>
         </x-slot>
 
     </x-jet-dialog-modal>

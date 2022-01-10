@@ -13,6 +13,7 @@ class Servicio extends Model
         'tipo_id',
         'personal',
         'user_id',
+        'mascota_id',
         'costo',
         'jaula_id'
     ];
@@ -29,6 +30,9 @@ class Servicio extends Model
     }
     public function recurso(){
         return $this->belongsTo(Recurso::class);
+    }
+    public function mascota(){
+        return $this->belongsTo(Mascota::class);
     }
 
     

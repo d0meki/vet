@@ -2,27 +2,36 @@
 
 namespace App\Http\Livewire;
 
-use App\Helpers\BitacoraHelper;
-use App\Models\DetalleHistorial;
-use App\Models\Mascota;
-use App\Models\Servicio;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Models\Servicio;
+use App\Models\Mascota;
+use App\Models\DetalleHistorial;
 
 class AddHistorial extends Component
 {
-    public $isModal=false;
-    public $servicios, $mascotas, $detallehistorial, $mascota_id=0;
+    public $isModal = false;
+    public $servicios, $mascotas, $detallehistorial, $mascota_id = 0;
     public $temperatura, $peso, $sintomas, $diagnostico, $servicio_id, $detalle_id;
 
 
     public function render()
     {
-        $this->servicios = Servicio::all();
+        $this->servicios = Servicio::where('servicios.mascota_id', $this->mascota_id)->get();
         $this->mascotas = Mascota::all();
-        $this->detallehistorial = DetalleHistorial::where('mascota_id', $this->mascota_id)->get();
-        return view('livewire.add-historial');   
+        $this->detallehistorial = DetalleHistorial::where('detalle_historials.mascota_id', $this->mascota_id)
+            ->select(
+                'detalle_historials.id',
+                'detalle_historials.temperatura_cent',
+                'detalle_historials.peso_gramos',
+                'detalle_historials.sintomas',
+                'detalle_historials.diagnostico',
+                'servicios.nombre AS nombre_servicio',
+                'detalle_historials.created_at',
+                'detalle_historials.updated_at',
+            )
+            ->join('servicios', 'detalle_historials.servicio_id', '=', 'servicios.id')
+            ->get();
+        return view('livewire.add-historial');
     }
 
     public function create()
@@ -30,7 +39,6 @@ class AddHistorial extends Component
         $this->openModal();
         $this->resetForm();
         $this->servicios = Servicio::all();
-        
     }
     public function openModal()
     {
@@ -57,8 +65,6 @@ class AddHistorial extends Component
             'diagnostico' => 'required',
             'servicio_id' => 'required',
         ]);
-
-
         DetalleHistorial::updateOrCreate(['id' => $this->detalle_id], [
             'temperatura_cent' => $this->temperatura,
             'peso_gramos' => $this->peso,
@@ -67,7 +73,6 @@ class AddHistorial extends Component
             'mascota_id' => $this->mascota_id,
             'servicio_id' => $this->servicio_id,
         ]);
-        BitacoraHelper::insertBitacora('El usuario '.Auth::user()->name.' creo historial del servicio con ID: '.$this->servicio_id);
         $this->closeModal();
         $this->resetForm();
     }
@@ -85,8 +90,6 @@ class AddHistorial extends Component
     }
     public function delete($id)
     {
-        
         DetalleHistorial::find($id)->delete();
-        BitacoraHelper::insertBitacora('El usuario '.Auth::user()->name.' elimino el Historial con ID: '.$id);
     }
 }

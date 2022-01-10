@@ -24,3 +24,4 @@ Route::post('/log',[AuthController::class, 'login']);
 Route::post('/userInfo',[AuthController::class, 'infoUser'])->middleware('auth:sanctum');
 
 Route::get('/servicios',[ApiTipoServiciosController::class,'index']);
+

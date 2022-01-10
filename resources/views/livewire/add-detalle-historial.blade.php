@@ -1,7 +1,7 @@
 <div>
     {{-- The best athlete wants his opponent at his best. --}}
     <button class="p-2 pl-5 pr-5 bg-green-500 text-gray-100 text-lg rounded-lg" wire:click="create()">
-        Crear Nuevo Servicio
+        Crear Nuevo Historial
     </button>
 
     <x-jet-dialog-modal wire:model="isModal">
@@ -39,16 +39,14 @@
             {{-- SERVICIOS --}}
             <div>
                 <x-jet-label value="Servicio realizado" />
-                <select class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
-                wire:model.defer="servicio_id">
-                 <option value="Servicio">Seleccione Servicio</option>
-                @foreach ($servicios as $item)
-                    <option value="{{$item->id}}">{{$item->nombre}}</option>
-                @endforeach
+                <select
+                    class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
+                    wire:model.defer="servicio_id">
+                    <option value=null>Elige un servicio</option>
+                    @foreach ($servicios as $item)
+                        <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                    @endforeach
                 </select>
-                {{ $this->mascota_id }}
-                <br>
-                {{ $this->servicio_id  }}
             </div>
         </x-slot>
 

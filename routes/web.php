@@ -3,6 +3,7 @@
 use App\Http\Livewire\AddHistorial;
 use App\Http\Livewire\IndexServicio;
 use App\Http\Livewire\Jaula;
+use App\Http\Livewire\ListVacunas;
 use App\Http\Livewire\Mascota;
 use App\Http\Livewire\Mascotas;
 use App\Http\Livewire\Recetas;
@@ -46,6 +47,11 @@ Route::get('/servicios', IndexServicio::class)->name('index.servicios');
 Route::get('/mascotas', ShowMascotas::class)->name('show.pets');
 Route::get('/addservicios', ShowAddservicio::class)->name('show.addservicios');
 
+
+Route::get('/listvacuna', ListVacunas::class)->name('show.listvacuna');
+Route::get('/imprimir/{id}', [ListVacunas::class, 'generatePDF'])->name('ver.carnet');
+Route::get('/carnet/{id}', [Mascotas::class, 'generarCarnet'])->name('ver.carnetMascota');
+Route::get('/historial/{id}', [Mascotas::class, 'generarHistorial'])->name('ver.historialMascota');
 
 
 Route::get('/imprimir/{id}', [VerRecursos::class , 'imprimir'])->name('ver.receta');

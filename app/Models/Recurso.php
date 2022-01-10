@@ -12,6 +12,7 @@ class Recurso extends Model
         'nombre',
         'serie',
         'servicio_id',
+        'tipo',
         'costo'
     ];
     public function servicio(){

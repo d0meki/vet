@@ -2,6 +2,9 @@
     <a href="#" class="text-indigo-600 hover:text-indigo-900" wire:click="$set('open',true)">
         Ver recursos Y receta
     </a>
+   {{--  <x-jet-dropdown-link href="#" wire:click="$set('open',true)">
+        {{ __('Ver Recursos y Receta') }}
+    </x-jet-dropdown-link> --}}
     <x-jet-dialog-modal wire:model="open">
 
         <x-slot name='title'>
@@ -10,22 +13,22 @@
 
         <x-slot name='content'>
             <samp><strong>Receta</samp></h1>
-            <a class="btn btn-red mr-4 float-right" href="{{ route('ver.receta',$this->servicio->id) }}" >
-                Imprimir Receta  <i class="fas fa-print"></i>
+            <a class="btn btn-red mr-4 float-right" href="{{ route('ver.receta', $this->servicio->id) }}">
+                Imprimir Receta <i class="fas fa-print"></i>
             </a>
             @if (count($recetas))
-            <div class="w-full bg-white rounded-lg shadow-lg lg:w-1/3">
-                <samp><strong>Fecha: {{ $recetas[0]->created_at }}</strong></samp>
-                <ul class="px-0">
-                    @foreach ($recetas as $item)
-                        <li class="border  list-none rounded-sm px-3 py-3">{{ $item->nombre_medicamento }} -
-                            {{ $item->dosis }}
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+                <div class="w-full bg-white rounded-lg shadow-lg lg:w-1/3">
+                    <samp><strong>Fecha: {{ $recetas[0]->created_at }}</strong></samp>
+                    <ul class="px-0">
+                        @foreach ($recetas as $item)
+                            <li class="border  list-none rounded-sm px-3 py-3">{{ $item->nombre_medicamento }} -
+                                {{ $item->dosis }}
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
-            
+
             <h1><strong>Recursos</strong></h1>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
                 <x-table>
@@ -78,7 +81,7 @@
                     </table>
                 </x-table>
             </div>
-
+            <span><strong>Total Costo Agregar: </strong>{{ $costoTotal }}</span>
         </x-slot>
 
         <x-slot name='footer'>

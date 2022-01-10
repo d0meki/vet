@@ -84,6 +84,31 @@
                 @enderror
             </div>
             <div class="mb-4">
+                <x-jet-label value="Mascota" />
+                <x-jet-input type="text" class="w-full" wire:model="mascota_name" />
+                @if (count($this->query2))
+                    @if ($this->mascota_name == '')
+                        <span></span>
+                    @else
+                        @if ($this->mascota_name == $this->query2[0]->nombre)
+                            <span></span>
+                        @else
+                            <span>
+                                {{ $this->query2[0]->nombre }}
+                            </span>
+                        @endif
+                    @endif
+                @else
+                    <span>No existen registros coinsidentes</span>
+                @endif
+                <x-jet-input-error for='mascota_name' />
+                @error('mascota_name')
+                    <span>
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
+            <div class="mb-4">
                 <x-jet-label value="Lista de Jaulas" />
                 <select wire:model="jaula_nombre" class="mr-4 ml-4 form-control">
                     <option>Seleccione una Jaula</option>

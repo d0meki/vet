@@ -15,7 +15,7 @@ class CreateServiciosTable extends Migration
     {
         Schema::create('servicios', function (Blueprint $table) {
             $table->id();
-            $table->String('nombre', 45);
+            $table->String('nombre', 100);
             $table->unsignedBigInteger('tipo_id');
             $table->foreign('tipo_id')
                 ->references('id')
@@ -30,6 +30,12 @@ class CreateServiciosTable extends Migration
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->unsignedBigInteger('mascota_id');
+            $table->foreign('mascota_id')
+                ->references('id')
+                ->on('mascotas')
+                ->onDelete('cascade')
+                ->onUpdate('cascade'); 
             $table->unsignedBigInteger('jaula_id')->nullable();
             $table->foreign('jaula_id')
                 ->references('id')

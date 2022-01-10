@@ -11,6 +11,7 @@ class VerRecursos extends Component
 {    
     public $open = false;
     public $servicio;
+
     public function mount(Servicio $servicio){
         $this->servicio = $servicio;
     }
@@ -29,6 +30,11 @@ class VerRecursos extends Component
     {
         $recetas = Receta::where('servicio_id',$this->servicio->id)->get();
         $recursos = Recurso::where('servicio_id',$this->servicio->id)->get();
-        return view('livewire.ver-recursos',compact('recursos','recetas'));
+        $costoTotal = 0;
+        foreach ($recursos as $item) { 
+            $costoTotal = $costoTotal + $item->costo;
+        }
+
+        return view('livewire.ver-recursos',compact('recursos','recetas','costoTotal'));
     }
 }

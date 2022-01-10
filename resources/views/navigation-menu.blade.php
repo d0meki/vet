@@ -10,12 +10,43 @@
                     </a>
                 </div>
 
+
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     {{-- <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link> --}}
-
+                    @can('show.mascotas')
+                        <x-jet-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('jaulas')">
+                            Perfil
+                        </x-jet-nav-link>
+                    @endcan
+                    @can('show.mascotas')
+                        <x-jet-nav-link href="{{ route('show.mascotas') }}" :active="request()->routeIs('jaulas')">
+                            Mis Mascotas
+                        </x-jet-nav-link>
+                    @endcan
+                    @can('show.mascotas')
+                    <x-jet-nav-link href="#" :active="request()->routeIs('jaulas')">
+                        Mis recetas
+                    </x-jet-nav-link>
+                    @endcan
+                    @can('show.mascotas')
+                    <x-jet-nav-link href="#" :active="request()->routeIs('jaulas')">
+                        Servicios Adquiridos
+                    </x-jet-nav-link>
+                    @endcan
+                    @can('show.mascotas')
+                    <x-jet-nav-link href="#" :active="request()->routeIs('jaulas')">
+                        Hacer Recerva
+                    </x-jet-nav-link>
+                    @endcan
+                    @can('show.mascotas')
+                    <x-jet-nav-link href="#" :active="request()->routeIs('jaulas')">
+                        Mis Facturas
+                    </x-jet-nav-link>
+                    @endcan
+                   
                     @can('show.jaulas')
                         <x-jet-nav-link href="{{ route('show.jaulas') }}" :active="request()->routeIs('jaulas')">
                             Jaulas
@@ -26,7 +57,7 @@
                             Tipos de Servicio
                         </x-jet-nav-link>
                     @endcan
-                   {{--  @can('show.recetas')
+                    {{-- @can('show.recetas')
                         <x-jet-nav-link href="{{ route('show.recetas') }}" :active="request()->routeIs('recetas')">
                             Recetas
                         </x-jet-nav-link>
@@ -37,17 +68,26 @@
                             Carnet Vacunacion
                         </x-jet-nav-link>
                     @endcan --}}
-                    @can('show.pets')
+                    @can('show.usuarios')
                         <x-jet-nav-link href="{{ route('show.pets') }}" :active="request()->routeIs('pets')">
                             Pets
                         </x-jet-nav-link>
                     @endcan
-                    <x-jet-nav-link href="{{ route('show.addhistorial') }}" :active="request()->routeIs('pets')">
-                        Add Historial
+                    @can('show.usuarios')
+                    <x-jet-nav-link href="{{ route('show.listvacuna') }}" :active="request()->routeIs('pets')">
+                        Vacunas
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('show.addservicios') }}" :active="request()->routeIs('serv')">
-                        Add Servicios
-                    </x-jet-nav-link>
+                    @endcan
+                    @can('index.servicios')
+                        <x-jet-nav-link href="{{ route('show.addhistorial') }}" :active="request()->routeIs('pets')">
+                            Add Historial
+                        </x-jet-nav-link>
+                    @endcan
+                    @can('index.servicios')
+                        <x-jet-nav-link href="{{ route('show.addservicios') }}" :active="request()->routeIs('serv')">
+                            Add Servicios
+                        </x-jet-nav-link>
+                    @endcan
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         @can('show.usuarios')
                             <x-jet-dropdown align="right" width="60">
@@ -76,10 +116,9 @@
                                 </x-slot>
                             </x-jet-dropdown>
                         @endcan
-
-
                     </div>
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        @can('show.usuarios')
                             <x-jet-dropdown align="right" width="60">
                                 <x-slot name="trigger">
                                     <x-jet-nav-link href="#">
@@ -97,8 +136,9 @@
                                     </x-jet-dropdown-link>
                                 </x-slot>
                             </x-jet-dropdown>
+                        @endcan
                     </div>
-                   {{--  <x-jet-nav-link href="{{ route('show.reportes_servicios') }}" >
+                    {{-- <x-jet-nav-link href="{{ route('show.reportes_servicios') }}" >
                         {{ __('Reportes Servicio') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('show.reportes_bitacora') }}" >
@@ -273,7 +313,7 @@
                     Tipos de Servicio
                 </x-jet-responsive-nav-link>
             @endcan
-           {{--  @can('show.recetas')
+            {{-- @can('show.recetas')
                 <x-jet-responsive-nav-link href="{{ route('show.recetas') }}" :active="request()->routeIs('recetas')">
                     Recetas
                 </x-jet-responsive-nav-link>

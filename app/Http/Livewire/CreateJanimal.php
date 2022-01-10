@@ -51,8 +51,6 @@ class CreateJanimal extends Component
             $this->identificador = rand();
             $this->emitTo('jaula','render');
             $this->emit('alert','la jaula fue creada exitosamente');
-
-
     }
     public function render()
     {

@@ -17,6 +17,7 @@ class CreateRecursosTable extends Migration
             $table->id();
             $table->String('nombre', 45);
             $table->String('serie', 45);
+            $table->String('tipo', 45);
             $table->decimal('costo', 6, 2);
             $table->unsignedBigInteger('servicio_id');
             $table->foreign('servicio_id')
