@@ -20,7 +20,7 @@
                 @endforeach
             </select>
 
-            <a class="btn btn-primary" href="{{ URL::to('/imprimir', $mascota_id) }}">Export to PDF</a>
+            <a class="btn btn-primary" href="{{ URL::to('/imprimirvacuna', $mascota_id) }}">Export to PDF</a>
 
 
             {{-- <button class="p-2 pl-5 pr-5 bg-green-500 text-gray-100 text-lg rounded-lg"

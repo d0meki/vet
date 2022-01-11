@@ -23,8 +23,8 @@ class BackupController extends Controller
         /*$fecha=date('m-d-Y h:i:s a', time());*/
         $rutadearchivo = $rutapadre.$fecha.".txt";
        /*  echo "\nLa hora y fecha es: $rutadearchivo"; */
-       dd($rutadearchivo);
-        system("pg_dump  -U Freddy -P irascema -d jetstream -h localhost -f \"$rutapadre$fecha.txt\"");
+      // dd($rutadearchivo);
+        system("pg_dump  -U Freddy -d jetstream -h localhost -f \"$rutapadre$fecha.txt\"");
 
     
         //guardar archivo

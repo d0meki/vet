@@ -39,7 +39,7 @@ class ListVacunas extends Component
             ->join('servicios', 'servicios.id', '=', 'recursos.servicio_id')
             ->join('mascotas', 'mascotas.id', '=', 'servicios.mascota_id')
             ->where('mascotas.id', $id)
-            ->where('tipo', 'vacuna')
+            ->where('recursos.tipo', 'vacuna')
             ->get();
         view()->share('vacunas', $vacunas);
         $pdf = PDF::loadView('livewire.print-vacunas', $vacunas);
