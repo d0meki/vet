@@ -131,13 +131,17 @@
                                     </x-jet-nav-link>
                                 </x-slot>
                                 <x-slot name="content">
-                                    <x-jet-dropdown-link href="{{ route('show.reportes_servicios') }}"
+                                    <x-jet-dropdown-link href="{{ route('index.reportes') }}"
                                         :active="request()->routeIs('reportes')">
                                         {{ __('Reportes Servicio') }}
                                     </x-jet-dropdown-link>{{--  --}}
-                                    <x-jet-dropdown-link href="{{ route('show.reportes_bitacora') }}"
+                                    <x-jet-dropdown-link href="{{ route('index.bitacora') }}"
                                         :active="request()->routeIs('bitacoras')">
                                         {{ __('Reporte Bitacora') }}
+                                    </x-jet-dropdown-link>
+                                    <x-jet-dropdown-link href="{{ route('backup.store') }}"
+                                        :active="request()->routeIs('bitacoras')">
+                                        {{ __('BackUp') }}
                                     </x-jet-dropdown-link>
                                 </x-slot>
                             </x-jet-dropdown>

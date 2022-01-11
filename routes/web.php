@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BackupController;
 use App\Http\Livewire\AddHistorial;
 use App\Http\Livewire\CreateFactura;
 use App\Http\Livewire\IndexServicio;
@@ -15,6 +16,8 @@ use App\Http\Livewire\ShowUsuarios;
 use App\Http\Livewire\VerRecursos;
 use Facade\Ignition\ErrorPage\Renderer;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Reportes;
+use App\Http\Livewire\Bitacora;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,10 +55,16 @@ Route::get('/addservicios', ShowAddservicio::class)->name('show.addservicios');
 Route::get('/factura', ShowFactura::class)->name('show.factura');
 
 Route::get('/listvacuna', ListVacunas::class)->name('show.listvacuna');
-Route::get('/imprimir/{id}', [ListVacunas::class, 'generatePDF'])->name('ver.carnet');
+Route::get('/imprimirvacuna/{id}', [ListVacunas::class, 'generatePDF'])->name('ver.carnet');
 Route::get('/carnet/{id}', [Mascotas::class, 'generarCarnet'])->name('ver.carnetMascota');
 Route::get('/historial/{id}', [Mascotas::class, 'generarHistorial'])->name('ver.historialMascota');
 
+
+Route::get('/reportes', Reportes::class)->name('index.reportes');
+Route::get('/bitacora', Bitacora::class)->name('index.bitacora');
+
+//Route::get('/backup','App\Http\Controllers\BackupController@store')->name('backup.store');
+Route::get('/backup',[BackupController::class,'store'])->name('backup.store');
 
 Route::get('/imprimir/{id}', [VerRecursos::class , 'imprimir'])->name('ver.receta');
 Route::get('/addhistorial', AddHistorial::class)->name('show.addhistorial');
