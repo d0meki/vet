@@ -15,6 +15,19 @@ class CreateDetalleFacturasTable extends Migration
     {
         Schema::create('detalle_facturas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('factura_id')
+            ->nullable() //--permite valores nulos
+            ->constrained('facturas')
+            ->cascadeOnUpdate()
+            ->nullOnDelete();
+           
+            $table->foreignId('servicio_id')
+            ->nullable() //--permite valores nulos
+            ->constrained('servicios')
+            ->cascadeOnUpdate()
+            ->nullOnDelete();
+
+            $table->float('precio');
             $table->timestamps();
         });
     }

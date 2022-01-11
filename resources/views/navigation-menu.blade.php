@@ -26,7 +26,7 @@
                             Mis Mascotas
                         </x-jet-nav-link>
                     @endcan
-                    @can('show.mascotas')
+                   {{--  @can('show.mascotas')
                     <x-jet-nav-link href="#" :active="request()->routeIs('jaulas')">
                         Mis recetas
                     </x-jet-nav-link>
@@ -45,8 +45,12 @@
                     <x-jet-nav-link href="#" :active="request()->routeIs('jaulas')">
                         Mis Facturas
                     </x-jet-nav-link>
+                    @endcan --}}
+                    @can('index.servicios')
+                        <x-jet-nav-link href="{{ route('show.factura') }}" :active="request()->routeIs('serv')">
+                            Add Factura
+                        </x-jet-nav-link>
                     @endcan
-                   
                     @can('show.jaulas')
                         <x-jet-nav-link href="{{ route('show.jaulas') }}" :active="request()->routeIs('jaulas')">
                             Jaulas
@@ -88,6 +92,7 @@
                             Add Servicios
                         </x-jet-nav-link>
                     @endcan
+                   
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         @can('show.usuarios')
                             <x-jet-dropdown align="right" width="60">

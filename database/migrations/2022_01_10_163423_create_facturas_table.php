@@ -15,6 +15,16 @@ class CreateFacturasTable extends Migration
     {
         Schema::create('facturas', function (Blueprint $table) {
             $table->id();
+            $table->date('fecha');
+            $table->integer('nit');
+            $table->string('nombre',80);
+            $table->float('total');
+            
+            $table->foreignId('metodopago_id')
+            ->nullable() //--permite valores nulos
+            ->constrained('metodo_pagos')
+            ->cascadeOnUpdate()
+            ->nullOnDelete();
             $table->timestamps();
         });
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\AddHistorial;
+use App\Http\Livewire\CreateFactura;
 use App\Http\Livewire\IndexServicio;
 use App\Http\Livewire\Jaula;
 use App\Http\Livewire\ListVacunas;
@@ -8,6 +9,7 @@ use App\Http\Livewire\Mascota;
 use App\Http\Livewire\Mascotas;
 use App\Http\Livewire\Recetas;
 use App\Http\Livewire\ShowAddservicio;
+use App\Http\Livewire\ShowFactura;
 use App\Http\Livewire\ShowMascotas;
 use App\Http\Livewire\ShowUsuarios;
 use App\Http\Livewire\VerRecursos;
@@ -47,6 +49,7 @@ Route::get('/servicios', IndexServicio::class)->name('index.servicios');
 Route::get('/mascotas', ShowMascotas::class)->name('show.pets');
 Route::get('/addservicios', ShowAddservicio::class)->name('show.addservicios');
 
+Route::get('/factura', ShowFactura::class)->name('show.factura');
 
 Route::get('/listvacuna', ListVacunas::class)->name('show.listvacuna');
 Route::get('/imprimir/{id}', [ListVacunas::class, 'generatePDF'])->name('ver.carnet');
@@ -57,6 +60,7 @@ Route::get('/historial/{id}', [Mascotas::class, 'generarHistorial'])->name('ver.
 Route::get('/imprimir/{id}', [VerRecursos::class , 'imprimir'])->name('ver.receta');
 Route::get('/addhistorial', AddHistorial::class)->name('show.addhistorial');
 
+Route::get('/print/{id}', [ShowFactura::class , 'imprimir'])->name('ver.factura');
 
 Route::get('/servicioreporte','App\Http\Controllers\ReportesController@GenerarReporteServicios')
     ->name('show.reportes_servicios');

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApiTipoServiciosController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MascotaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +20,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('/reg',[AuthController::class, 'register']);
+/* Route::post('/reg',[AuthController::class, 'register']);
 Route::post('/log',[AuthController::class, 'login']);
 Route::post('/userInfo',[AuthController::class, 'infoUser'])->middleware('auth:sanctum');
 
-Route::get('/servicios',[ApiTipoServiciosController::class,'index']);
+Route::get('/servicios',[ApiTipoServiciosController::class,'index']); */
+
+Route::post('/auth/register', [AuthController::class, 'register']);
+
+Route::post('/auth/login', [AuthController::class, 'login']);
+Route::get('/servicios',[ServicioController::class,'index']);
+Route::post('reserva/create', [ReservaController::class, 'reservado']);
+Route::get('mascotas/{id}', [MascotaController::class, 'getmascota']);
 
